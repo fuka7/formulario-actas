@@ -53,8 +53,14 @@
                     <small id="errorRutUsuario" class="error-message"></small>
                 </div>
 
-                <input type="email" id="emailUsuario" placeholder="Email Usuario">
-                <input type="text" id="telefono" placeholder="Teléfono">
+                <div>
+                    <input type="email" id="emailUsuario" placeholder="Email Usuario">
+                    <small id="errorEmailUsuario" class="error-message"></small>
+                </div>
+                <div>
+                    <input type="text" id="telefono" placeholder="Teléfono">
+                    <small id="errorTelefono" class="error-message"></small>
+                </div>
                 <input type="text" id="cargoUsuario" placeholder="Cargo Usuario">
             </div>
 
@@ -146,8 +152,14 @@
                 <input type="text" id="nombreUsuario" placeholder="Nombre Completo" required>
                 <input type="text" id="cargoUsuarioFirma" placeholder="Cargo" required>
                 <input type="text" id="unidadUsuario" placeholder="Unidad o Departamento">
-                <input type="email" id="correoUsuario" placeholder="Correo">
-                <input type="text" id="telefonoUsuario" placeholder="Teléfono">
+                <div>
+                    <input type="email" id="correoUsuario" placeholder="Correo">
+                    <small id="errorCorreoUsuario" class="error-message"></small>
+                </div>
+                <div>
+                    <input type="text" id="telefonoUsuario" placeholder="Teléfono">
+                    <small id="errorTelefonoUsuario" class="error-message"></small>
+                </div>
             </div>
 
             <h3>Firma Digital</h3>
@@ -172,14 +184,9 @@
 
             <input type="hidden" id="firmaBase64">
 
-            <div class="acciones-finales">
-                <button type="button" onclick="generarPDF()" class="submit-btn">
-                    📄 Generar PDF
-                </button>
-                <button type="button" id="btnNuevaActa" class="nueva-acta-btn" style="display:none;">
-                    🆕 Crear otra acta
-                </button>
-            </div>
+            <button type="button" onclick="generarPDF()" class="submit-btn">
+                📄 Generar PDF
+            </button>
         </section>
 
     </form>
