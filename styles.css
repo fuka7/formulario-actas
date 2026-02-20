@@ -475,6 +475,37 @@ textarea {
     box-shadow: 0 20px 60px rgba(0,0,0,0.18);
 }
 
+/* ===== ACCIONES FINALES ===== */
+.acciones-finales {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ===== BOTÓN NUEVA ACTA ===== */
+.nueva-acta-btn {
+    display: none; /* se muestra via JS tras descargar */
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: var(--blue);
+    border: 2px solid var(--blue);
+    border-radius: var(--radius-sm);
+    padding: 12px 28px;
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .15s;
+    letter-spacing: -0.2px;
+}
+.nueva-acta-btn:hover {
+    background: var(--blue-light);
+    transform: translateY(-1px);
+}
+.nueva-acta-btn:active { transform: scale(0.98); }
+
 /* ===== RESPONSIVE ===== */
 
 /* Tablet */
@@ -629,6 +660,20 @@ textarea {
 
     /* Botón generar PDF ancho completo */
     .submit-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 20px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+    /* Acciones finales en columna en móvil */
+    .acciones-finales {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nueva-acta-btn {
         width: 100%;
         justify-content: center;
         padding: 15px 20px;

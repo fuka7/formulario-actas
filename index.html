@@ -172,9 +172,14 @@
 
             <input type="hidden" id="firmaBase64">
 
-            <button type="button" onclick="generarPDF()" class="submit-btn">
-                📄 Generar PDF
-            </button>
+            <div class="acciones-finales">
+                <button type="button" onclick="generarPDF()" class="submit-btn">
+                    📄 Generar PDF
+                </button>
+                <button type="button" id="btnNuevaActa" class="nueva-acta-btn" style="display:none;">
+                    🆕 Crear otra acta
+                </button>
+            </div>
         </section>
 
     </form>

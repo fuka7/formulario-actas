@@ -221,9 +221,93 @@ function activarValidacionRut(inputId, errorId) {
     });
 }
 
-// Activar validación en ambos campos
+// Activar validación en ambos campos RUT
 activarValidacionRut("rutUsuario", "errorRutUsuario");
 activarValidacionRut("rutTecnico", "errorRutTecnico");
+
+// ================= VALIDACIÓN EMAIL =================
+
+function activarValidacionEmail(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+    if (!input || !error) return;
+
+    const validar = val => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+    input.addEventListener("input", function () {
+        const val = this.value.trim();
+        if (!val) {
+            error.style.display = "none";
+            input.classList.remove("input-error", "input-valid");
+            return;
+        }
+        if (validar(val)) {
+            error.textContent = "✔ Email válido";
+            error.className = "error-message valid-message";
+            error.style.display = "block";
+            input.classList.remove("input-error");
+            input.classList.add("input-valid");
+        } else {
+            error.textContent = "Ingrese un email válido (ej: nombre@dominio.cl)";
+            error.className = "error-message invalid-message";
+            error.style.display = "block";
+            input.classList.remove("input-valid");
+            input.classList.add("input-error");
+        }
+    });
+
+    input.addEventListener("blur", function () {
+        if (!this.value.trim()) {
+            error.style.display = "none";
+            input.classList.remove("input-error", "input-valid");
+        }
+    });
+}
+
+activarValidacionEmail("emailUsuario", "errorEmailUsuario");
+activarValidacionEmail("correoUsuario", "errorCorreoUsuario");
+
+// ================= VALIDACIÓN TELÉFONO =================
+
+function activarValidacionTelefono(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+    if (!input || !error) return;
+
+    const validar = val => /^\d{7,15}$/.test(val.replace(/[\s\-().+]/g, ''));
+
+    input.addEventListener("input", function () {
+        const val = this.value.trim();
+        if (!val) {
+            error.style.display = "none";
+            input.classList.remove("input-error", "input-valid");
+            return;
+        }
+        if (validar(val)) {
+            error.textContent = "✔ Teléfono válido";
+            error.className = "error-message valid-message";
+            error.style.display = "block";
+            input.classList.remove("input-error");
+            input.classList.add("input-valid");
+        } else {
+            error.textContent = "Ingrese un teléfono válido (ej: +56 9 1234 5678)";
+            error.className = "error-message invalid-message";
+            error.style.display = "block";
+            input.classList.remove("input-valid");
+            input.classList.add("input-error");
+        }
+    });
+
+    input.addEventListener("blur", function () {
+        if (!this.value.trim()) {
+            error.style.display = "none";
+            input.classList.remove("input-error", "input-valid");
+        }
+    });
+}
+
+activarValidacionTelefono("telefono", "errorTelefono");
+activarValidacionTelefono("telefonoUsuario", "errorTelefonoUsuario");
 
 // Animar inputs requeridos si quedan vacíos (shake) al perder foco
 (function attachRequiredInputHandlers(){
@@ -291,8 +375,8 @@ activarValidacionRut("rutTecnico", "errorRutTecnico");
         Array.from(document.querySelectorAll('#registroForm .input-error, #registroForm .input-valid'))
             .forEach(el => el.classList.remove('input-error', 'input-valid'));
 
-        // Ocultar mensajes de RUT
-        ['errorRutUsuario', 'errorRutTecnico'].forEach(id => {
+        // Ocultar mensajes de RUT, email y teléfono
+        ['errorRutUsuario', 'errorRutTecnico', 'errorEmailUsuario', 'errorCorreoUsuario', 'errorTelefono', 'errorTelefonoUsuario'].forEach(id => {
             const el = document.getElementById(id);
             if (el) { el.style.display = 'none'; el.textContent = ''; }
         });
