@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro Cambio de Equipo - MINSAL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="app-header">
+    <div class="header-inner">
+        <div class="header-logo">🏥</div>
+        <div class="header-title">
+            <h1>Registro Cambio de Equipo</h1>
+            <p>MINISTERIO DE SALUD</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <form id="registroForm">
+
+        <!-- DATOS GENERALES -->
+        <section class="card">
+            <h2><span class="section-icon">🏢</span> Datos Generales</h2>
+
+            <div class="grid-2">
+                <select id="organismo" required>
+                    <option value="">Seleccione Organismo</option>
+                </select>
+                <input type="text" id="establecimiento" placeholder="Establecimiento" required>
+                <input type="text" id="direccion" placeholder="Dirección">
+
+                <select id="region" required>
+                    <option value="">Seleccione Región</option>
+                </select>
+
+                <select id="ciudad" required>
+                    <option value="">Seleccione Comuna</option>
+                </select>
+
+                <input type="text" id="unidad" placeholder="Unidad o Departamento">
+                <input type="date" id="fecha">
+                <input type="text" id="responsable" placeholder="Responsable">
+
+                <div>
+                    <input type="text" id="rutUsuario" placeholder="RUT Usuario (12.345.678-9)" maxlength="12" required>
+                    <small id="errorRutUsuario" class="error-message"></small>
+                </div>
+
+                <input type="email" id="emailUsuario" placeholder="Email Usuario">
+                <input type="text" id="telefono" placeholder="Teléfono">
+                <input type="text" id="cargoUsuario" placeholder="Cargo Usuario">
+            </div>
+
+            <h3>Series de Equipos</h3>
+            <div class="grid-2">
+                <div>
+                    <span class="series-pill">EQUIPO SALIENTE</span>
+                    <input type="text" id="serieSaliente" placeholder="N° de serie" required>
+                </div>
+                <div>
+                    <span class="series-pill">EQUIPO RECAMBIO</span>
+                    <input type="text" id="serieRecambio" placeholder="N° de serie" required>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECKLIST -->
+        <section class="card">
+            <h2><span class="section-icon">✅</span> Checklist</h2>
+            <div class="checklist-row">
+                <div class="checklist-column">
+                    <h3>Instalación</h3>
+                    <div class="check-counter">Completadas: <span class="count-badge" id="countInstalacion">0 / 13</span></div>
+                    <div class="checklist instalacion">
+                        <label><input type="checkbox"><span class="check-label-text">Desembalaje, revisión e instalación física del equipo</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Instalación de PC y conexión de componentes básicos (mouse, teclado y torre)</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Verificación de conexión adecuada a la toma de corriente</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Instalación y configuración de periféricos adicionales (escáner, impresora, fax, etc.)</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Configuración y conexión a red de datos</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Configuración IP Equipo</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Instalación y personalización de aplicaciones desde el servidor de red</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Definición y configuración del servicio de impresión</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Migración de información del usuario desde su equipo antiguo</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Conexión final del equipo a la red</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Verificación de agente en línea con mesa de ayuda</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Configuración de correo electrónico del usuario</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Configuración de pie de firma en correo</span></label>
+                    </div>
+                </div>
+
+                <div class="checklist-column">
+                    <h3>Validación</h3>
+                    <div class="check-counter">Completadas: <span class="count-badge" id="countValidacion">0 / 4</span></div>
+                    <div class="checklist validacion">
+                        <label><input type="checkbox"><span class="check-label-text">Número de serie del equipo</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">N° Guía de despacho</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Revisión del sistema operativo y software instalados</span></label>
+                        <label><input type="checkbox"><span class="check-label-text">Entrega formal del equipo con formulario de ingreso</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:20px;">
+                <button type="button" class="select-all-global btn btn-primary" disabled>
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </span>
+                    <span class="btn-text">Seleccionar todo</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- OBSERVACIONES -->
+        <section class="card">
+            <h2><span class="section-icon">📝</span> Observaciones</h2>
+            <label for="observacionTecnico" style="display:block;font-size:13px;font-weight:600;color:var(--gray-600);margin-bottom:8px;">
+                Escriba aquí cualquier inconveniente o detalle relevante durante la instalación/validación:
+            </label>
+            <textarea id="observacionTecnico" rows="5" placeholder="Describa problemas, pasos adicionales, referencias..."></textarea>
+        </section>
+
+        <!-- DATOS TÉCNICO -->
+        <section class="card">
+            <h2><span class="section-icon">🔧</span> Datos Técnico</h2>
+            <div class="grid-2">
+                <input type="text" id="tecnico" placeholder="Técnico Instalador">
+                <div>
+                    <input type="text" id="rutTecnico" placeholder="RUT Técnico (12.345.678-9)" maxlength="12" required>
+                    <small id="errorRutTecnico" class="error-message"></small>
+                </div>
+            </div>
+        </section>
+
+        <!-- DATOS USUARIO / RESPONSABLE -->
+        <section class="card">
+            <h2><span class="section-icon">👨‍💼</span> Datos Usuario / Responsable MINSAL</h2>
+
+            <div class="grid-2">
+                <input type="text" id="nombreUsuario" placeholder="Nombre Completo" required>
+                <input type="text" id="cargoUsuarioFirma" placeholder="Cargo" required>
+                <input type="text" id="unidadUsuario" placeholder="Unidad o Departamento">
+                <input type="email" id="correoUsuario" placeholder="Correo">
+                <input type="text" id="telefonoUsuario" placeholder="Teléfono">
+            </div>
+
+            <h3>Firma Digital</h3>
+            <p style="font-size:13px;color:var(--gray-600);margin-bottom:12px;">Firme con el mouse en el área de abajo</p>
+
+            <div class="firma-container">
+                <canvas id="signaturePad"></canvas>
+                <div class="firma-placeholder" id="firmaPlaceholder">
+                    <span class="ph-icon">✍️</span>
+                    Firme aquí
+                </div>
+            </div>
+
+            <div class="firma-buttons">
+                <button type="button" class="btn-limpiar" onclick="clearSignature()">🗑 Limpiar Firma</button>
+                <button type="button" class="btn-confirmar" onclick="saveSignature()">✔ Confirmar Firma</button>
+            </div>
+
+            <div class="firma-confirmed" id="firmaConfirmada">
+                ✔ Firma confirmada correctamente
+            </div>
+
+            <input type="hidden" id="firmaBase64">
+
+            <button type="button" onclick="generarPDF()" class="submit-btn">
+                📄 Generar PDF
+            </button>
+        </section>
+
+    </form>
+</div>
+
+<script src="regiones-comunas.js"></script>
+<script src="organismos.js"></script>
+<script src="acta-template.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
