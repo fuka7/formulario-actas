@@ -451,7 +451,7 @@ window.generarPDF = async function () {
 };
 
 
-// ================= INICIALIZAR VALIDACIONES (validaciones.js) =================
+// ================= INICIALIZAR VALIDACIONES =================
 inicializarValidaciones();
 
 }); // fin DOMContentLoaded
