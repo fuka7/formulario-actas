@@ -128,6 +128,7 @@ html, body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
+    overflow: visible;
 }
 
 /* ===== INPUTS & SELECTS ===== */
@@ -485,7 +486,7 @@ textarea {
 
 /* ===== BOTÓN NUEVA ACTA ===== */
 .nueva-acta-btn {
-    display: none; /* se muestra via JS tras descargar */
+    display: none;
     align-items: center;
     gap: 8px;
     background: white;
@@ -667,7 +668,7 @@ textarea {
         border-radius: 10px;
     }
 
-    /* Acciones finales en columna en móvil */
+    /*columna en móvil */
     .acciones-finales {
         flex-direction: column;
         gap: 10px;

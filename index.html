@@ -44,7 +44,7 @@
                     <option value="">Seleccione Comuna</option>
                 </select>
 
-                <input type="text" id="unidad" placeholder="Unidad o Departamento">
+                <div style="position:relative"><input type="text" id="unidad" placeholder="Unidad o Departamento" style="width:100%"></div>
                 <input type="date" id="fecha">
                 <input type="text" id="responsable" placeholder="Responsable">
 
@@ -151,7 +151,7 @@
             <div class="grid-2">
                 <input type="text" id="nombreUsuario" placeholder="Nombre Completo" required>
                 <input type="text" id="cargoUsuarioFirma" placeholder="Cargo" required>
-                <input type="text" id="unidadUsuario" placeholder="Unidad o Departamento">
+                <div style="position:relative"><input type="text" id="unidadUsuario" placeholder="Unidad o Departamento" style="width:100%"></div>
                 <div>
                     <input type="email" id="correoUsuario" placeholder="Correo">
                     <small id="errorCorreoUsuario" class="error-message"></small>
@@ -184,9 +184,14 @@
 
             <input type="hidden" id="firmaBase64">
 
-            <button type="button" onclick="generarPDF()" class="submit-btn">
-                📄 Generar PDF
-            </button>
+            <div class="acciones-finales">
+                <button type="button" onclick="generarPDF()" class="submit-btn">
+                    📄 Generar PDF
+                </button>
+                <button type="button" id="btnNuevaActa" class="nueva-acta-btn" style="display:none;">
+                    🆕 Crear otra acta
+                </button>
+            </div>
         </section>
 
     </form>
@@ -198,6 +203,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="validaciones.js"></script>
 <script src="script.js"></script>
 
 </body>
