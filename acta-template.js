@@ -83,7 +83,7 @@ function generarContenidoActa(data) {
           <td>${val(data.region)}</td>
         </tr>
         <tr>
-          <td class="lc">Usuario</td>
+          <td class="lc">Responsable</td>
           <td>${val(data.usuarioDG)}</td>
           <td class="lc">RUT</td>
           <td>${val(data.rutUsuarioDG)}</td>
@@ -96,13 +96,24 @@ function generarContenidoActa(data) {
         </tr>
         <tr>
           <td class="lc">Cargo Usuario</td>
-          <td>${val(data.cargoUsuarioDG)}</td>
-          <td class="lc">Serie computador</td>
-          <td>${val(data.serieRecambio)}</td>
+          <td colspan="3">${val(data.cargoUsuarioDG)}</td>
         </tr>
+      </table>
+
+      <div class="spacer"></div>
+
+      <!-- SERIES DE EQUIPOS -->
+      <table>
+        <tr class="section-header"><td colspan="4"><strong>Series de Equipos</strong></td></tr>
         <tr>
-          <td class="lc">Serie saliente</td>
-          <td colspan="3">${val(data.serieSaliente)}</td>
+          <td class="lc">EQUIPO ENTRANTE</td>
+          <td style="font-size:12px;font-weight:bold;letter-spacing:0.5px;padding:4px 7px;">
+            ${val(data.serieRecambio)}
+          </td>
+          <td class="lc">EQUIPO SALIENTE</td>
+          <td style="font-size:12px;font-weight:bold;letter-spacing:0.5px;padding:4px 7px;">
+            ${val(data.serieSaliente)}
+          </td>
         </tr>
       </table>
 
