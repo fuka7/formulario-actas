@@ -280,7 +280,7 @@ function resetForm() {
     Array.from(document.querySelectorAll('#registroForm .input-error, #registroForm .input-valid'))
         .forEach(el => el.classList.remove('input-error', 'input-valid'));
 
-    ['errorRutUsuario','errorRutTecnico','errorEmailUsuario','errorCorreoUsuario','errorTelefono','errorTelefonoUsuario']
+    ['errorRutUsuarioDG','errorRutTecnico','errorRutUsuarioAsignado','errorEmailUsuarioDG','errorCorreoUsuario','errorTelefonoDG','errorTelefonoUsuario']
         .forEach(id => {
             const el = document.getElementById(id);
             if (el) { el.style.display = 'none'; el.textContent = ''; }
@@ -339,26 +339,33 @@ window.generarPDF = async function () {
         fecha:             g("fecha")
                            ? new Date(g("fecha") + 'T12:00:00').toLocaleDateString('es-CL')
                            : new Date().toLocaleDateString('es-CL'),
+        // Datos del establecimiento
         organismo:         g("organismo"),
         establecimiento:   g("establecimiento"),
         direccion:         g("direccion"),
         region:            g("region"),
         ciudad:            g("ciudad"),
         unidad:            g("unidad"),
-        responsable:       g("responsable"),
-        rutUsuario:        g("rutUsuario"),
-        emailUsuario:      g("emailUsuario"),
-        telefono:          g("telefono"),
-        cargoUsuario:      g("cargoUsuario"),
+        // Usuario del equipo (Datos Generales)
+        usuarioDG:         g("usuarioDG"),
+        rutUsuarioDG:      g("rutUsuarioDG"),
+        emailUsuarioDG:    g("emailUsuarioDG"),
+        telefonoDG:        g("telefonoDG"),
+        cargoUsuarioDG:    g("cargoUsuarioDG"),
+        // Series
         serieSaliente:     g("serieSaliente"),
         serieRecambio:     g("serieRecambio"),
+        // Técnico
         tecnico:           g("tecnico"),
         rutTecnico:        g("rutTecnico"),
+        // Checklists
         instalacionChecks: Array.from(document.querySelectorAll(".checklist.instalacion input")).map(i => i.checked),
         validacionChecks:  Array.from(document.querySelectorAll(".checklist.validacion input")).map(i => i.checked),
         observacion:       g("observacionTecnico"),
+        // Usuario Asignado / Responsable MINSAL (firma)
         nombreUsuario:     g("nombreUsuario"),
-        cargoUsuarioFirma: g("cargoUsuarioFirma") || g("cargoUsuario"),
+        rutUsuarioAsignado: g("rutUsuarioAsignado"),
+        cargoUsuarioFirma: g("cargoUsuarioFirma"),
         unidadUsuario:     g("unidadUsuario"),
         correoUsuario:     g("correoUsuario"),
         telefonoUsuario:   g("telefonoUsuario"),

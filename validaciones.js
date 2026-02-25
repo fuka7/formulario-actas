@@ -468,14 +468,18 @@ function activarValidacionRequeridos() {
 // INIT
 // ---------------------------------------------------------------
 function inicializarValidaciones() {
-    activarValidacionRut("rutUsuario",  "errorRutUsuario");
-    activarValidacionRut("rutTecnico",  "errorRutTecnico");
+    // Datos Generales (usuario del equipo)
+    activarValidacionRut("rutUsuarioDG",       "errorRutUsuarioDG");
+    activarValidacionEmail("emailUsuarioDG",   "errorEmailUsuarioDG");
+    activarValidacionTelefono("telefonoDG",    "errorTelefonoDG");
 
-    activarValidacionEmail("emailUsuario",  "errorEmailUsuario");
-    activarValidacionEmail("correoUsuario", "errorCorreoUsuario");
+    // Técnico
+    activarValidacionRut("rutTecnico",         "errorRutTecnico");
 
-    activarValidacionTelefono("telefono",        "errorTelefono");
-    activarValidacionTelefono("telefonoUsuario",  "errorTelefonoUsuario");
+    // Usuario Asignado (responsable MINSAL)
+    activarValidacionRut("rutUsuarioAsignado", "errorRutUsuarioAsignado");
+    activarValidacionEmail("correoUsuario",    "errorCorreoUsuario");
+    activarValidacionTelefono("telefonoUsuario", "errorTelefonoUsuario");
 
     activarAutocompleteUnidad("unidad");
     activarAutocompleteUnidad("unidadUsuario");

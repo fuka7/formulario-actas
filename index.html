@@ -46,22 +46,22 @@
 
                 <div style="position:relative"><input type="text" id="unidad" placeholder="Unidad o Departamento" style="width:100%"></div>
                 <input type="date" id="fecha">
-                <input type="text" id="usuario" placeholder="Usuario">
+                <input type="text" id="usuarioDG" placeholder="Nombre de usuario">
 
                 <div>
-                    <input type="text" id="rutUsuario" placeholder="RUT Usuario (12.345.678-9)" maxlength="12" required>
-                    <small id="errorRutUsuario" class="error-message"></small>
+                    <input type="text" id="rutUsuarioDG" placeholder="RUT Usuario (12.345.678-9)" maxlength="12" required>
+                    <small id="errorRutUsuarioDG" class="error-message"></small>
                 </div>
 
                 <div>
-                    <input type="email" id="emailUsuario" placeholder="Email Usuario">
-                    <small id="errorEmailUsuario" class="error-message"></small>
+                    <input type="email" id="emailUsuarioDG" placeholder="Email Usuario">
+                    <small id="errorEmailUsuarioDG" class="error-message"></small>
                 </div>
                 <div>
-                    <input type="text" id="telefono" placeholder="Teléfono">
-                    <small id="errorTelefono" class="error-message"></small>
+                    <input type="text" id="telefonoDG" placeholder="Teléfono">
+                    <small id="errorTelefonoDG" class="error-message"></small>
                 </div>
-                <input type="text" id="cargoUsuario" placeholder="Cargo Usuario">
+                <input type="text" id="cargoUsuarioDG" placeholder="Cargo Usuario">
             </div>
 
             <h3>Series de Equipos</h3>
@@ -144,12 +144,16 @@
             </div>
         </section>
 
-        <!-- DATOS Responsable-->
+        <!-- DATOS Usuario Asignado-->
         <section class="card">
             <h2><span class="section-icon">👨‍💼</span>Usuario Asignado</h2>
 
             <div class="grid-2">
                 <input type="text" id="nombreUsuario" placeholder="Nombre Completo" required>
+                <div>
+                    <input type="text" id="rutUsuarioAsignado" placeholder="RUT (12.345.678-9)" maxlength="12" required>
+                    <small id="errorRutUsuarioAsignado" class="error-message"></small>
+                </div>
                 <input type="text" id="cargoUsuarioFirma" placeholder="Cargo" required>
                 <div style="position:relative"><input type="text" id="unidadUsuario" placeholder="Unidad o Departamento" style="width:100%"></div>
                 <div>

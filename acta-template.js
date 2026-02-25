@@ -83,20 +83,20 @@ function generarContenidoActa(data) {
           <td>${val(data.region)}</td>
         </tr>
         <tr>
-          <td class="lc">Responsable</td>
-          <td>${val(data.responsable)}</td>
+          <td class="lc">Usuario</td>
+          <td>${val(data.usuarioDG)}</td>
           <td class="lc">RUT</td>
-          <td>${val(data.rutUsuario)}</td>
+          <td>${val(data.rutUsuarioDG)}</td>
         </tr>
         <tr>
           <td class="lc">Email Usuario</td>
-          <td>${val(data.emailUsuario)}</td>
+          <td>${val(data.emailUsuarioDG)}</td>
           <td class="lc">Teléfono</td>
-          <td>${val(data.telefono)}</td>
+          <td>${val(data.telefonoDG)}</td>
         </tr>
         <tr>
           <td class="lc">Cargo Usuario</td>
-          <td>${val(data.cargoUsuario)}</td>
+          <td>${val(data.cargoUsuarioDG)}</td>
           <td class="lc">Serie computador</td>
           <td>${val(data.serieRecambio)}</td>
         </tr>
@@ -172,7 +172,7 @@ function generarContenidoActa(data) {
         <tr class="section-header"><td colspan="4"><strong>Responsable MINSAL</strong></td></tr>
         <tr>
           <td class="lc">Nombre</td><td>${val(data.nombreUsuario)}</td>
-          <td class="lc">RUT</td><td>${val(data.rutUsuario)}</td>
+          <td class="lc">RUT</td><td>${val(data.rutUsuarioAsignado)}</td>
         </tr>
         <tr>
           <td class="lc">Cargo</td><td>${val(data.cargoUsuarioFirma)}</td>
