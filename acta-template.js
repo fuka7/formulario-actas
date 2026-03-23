@@ -38,6 +38,12 @@ function generarContenidoActa(data) {
       .acta-footer { text-align: center; font-size: 10px; color: #888; margin-top: 16px; padding-top: 8px; border-top: 1px solid #ccc; }
       .obs-box { border: 1px solid #ccc; padding: 6px 8px; min-height: 32px; white-space: pre-wrap; font-size: 11px; background: #fafafa; }
       .spacer { height: 10px; }
+      .firma-grid { display: table; width: 100%; border-collapse: collapse; }
+      .firma-col { display: table-cell; width: 50%; vertical-align: top; border: 1px solid #ccc; padding: 0; }
+      .firma-col:first-child { border-right: none; }
+      .firma-col table { border: none; width: 100%; }
+      .firma-col table td { border: none; border-bottom: 1px solid #eee; padding: 4px 7px; }
+      .firma-col table tr:last-child td { border-bottom: none; }
     </style>
 
     <div class="acta-body">
@@ -178,9 +184,11 @@ function generarContenidoActa(data) {
 
       <div class="spacer"></div>
 
-      <!-- RESPONSABLE MINSAL - ancho completo -->
+      <!-- RESPONSABLE MINSAL + FIRMANTE -->
+      ${data.mismoFirmante ? `
+      <!-- Mismo firmante: tabla ancho completo -->
       <table>
-        <tr class="section-header"><td colspan="4"><strong>Responsable MINSAL</strong></td></tr>
+        <tr class="section-header"><td colspan="4"><strong>Responsable MINSAL / Firmante</strong></td></tr>
         <tr>
           <td class="lc">Nombre</td><td>${val(data.nombreUsuario)}</td>
           <td class="lc">RUT</td><td>${val(data.rutUsuarioAsignado)}</td>
@@ -194,10 +202,43 @@ function generarContenidoActa(data) {
           <td class="lc">Teléfono</td><td>${val(data.telefonoUsuario)}</td>
         </tr>
         <tr>
-          <td class="lc">Firma Digital</td>
-          <td colspan="3" class="firma-area"><img src="${data.firma}" alt="firma"></td>
+          <td class="lc">Firma</td>
+          <td colspan="3" class="firma-area">${data.firma ? `<img src="${data.firma}" alt="firma">` : '—'}</td>
         </tr>
       </table>
+      ` : `
+      <!-- Firmante distinto: layout 2 columnas -->
+      <div class="firma-grid">
+        <div class="firma-col">
+          <table>
+            <tr class="section-header"><td colspan="2"><strong>Responsable MINSAL</strong></td></tr>
+            <tr><td class="lc">Nombre</td><td>${val(data.nombreUsuario)}</td></tr>
+            <tr><td class="lc">RUT</td><td>${val(data.rutUsuarioAsignado)}</td></tr>
+            <tr><td class="lc">Cargo</td><td>${val(data.cargoUsuarioFirma)}</td></tr>
+            <tr><td class="lc">Unidad</td><td>${val(data.unidadUsuario)}</td></tr>
+            <tr><td class="lc">Correo</td><td>${val(data.correoUsuario)}</td></tr>
+            <tr><td class="lc">Teléfono</td><td>${val(data.telefonoUsuario)}</td></tr>
+          </table>
+        </div>
+        <div class="firma-col">
+          <table>
+            <tr class="section-header"><td colspan="2"><strong>Datos Firmante</strong></td></tr>
+            <tr><td class="lc">Nombre</td><td>${val(data.nombreFirmante)}</td></tr>
+            <tr><td class="lc">RUT</td><td>${val(data.rutFirmante)}</td></tr>
+            <tr><td class="lc">Cargo</td><td>${val(data.cargoFirmante)}</td></tr>
+            <tr><td class="lc">Unidad</td><td>${val(data.unidadFirmante)}</td></tr>
+            <tr><td class="lc">Correo</td><td>${val(data.correoFirmante)}</td></tr>
+            <tr><td class="lc">Teléfono</td><td>${val(data.telefonoFirmante)}</td></tr>
+          </table>
+        </div>
+      </div>
+      <table>
+        <tr>
+          <td class="lc" style="width:18%">Firma</td>
+          <td class="firma-area">${data.firma ? `<img src="${data.firma}" alt="firma">` : '—'}</td>
+        </tr>
+      </table>
+      `}
 
       <!-- PIE -->
       <div class="acta-footer">
