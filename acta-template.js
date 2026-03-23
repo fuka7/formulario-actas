@@ -185,29 +185,7 @@ function generarContenidoActa(data) {
       <div class="spacer"></div>
 
       <!-- RESPONSABLE MINSAL + FIRMANTE -->
-      ${data.mismoFirmante ? `
-      <!-- Mismo firmante: tabla ancho completo -->
-      <table>
-        <tr class="section-header"><td colspan="4"><strong>Responsable MINSAL / Firmante</strong></td></tr>
-        <tr>
-          <td class="lc">Nombre</td><td>${val(data.nombreUsuario)}</td>
-          <td class="lc">RUT</td><td>${val(data.rutUsuarioAsignado)}</td>
-        </tr>
-        <tr>
-          <td class="lc">Cargo</td><td>${val(data.cargoUsuarioFirma)}</td>
-          <td class="lc">Unidad / Depto.</td><td>${val(data.unidadUsuario)}</td>
-        </tr>
-        <tr>
-          <td class="lc">Correo</td><td>${val(data.correoUsuario)}</td>
-          <td class="lc">Teléfono</td><td>${val(data.telefonoUsuario)}</td>
-        </tr>
-        <tr>
-          <td class="lc">Firma</td>
-          <td colspan="3" class="firma-area">${data.firma ? `<img src="${data.firma}" alt="firma">` : '—'}</td>
-        </tr>
-      </table>
-      ` : `
-      <!-- Firmante distinto: layout 2 columnas -->
+      <!-- Siempre 2 columnas: col izquierda = Responsable MINSAL, col derecha = Firmante -->
       <div class="firma-grid">
         <div class="firma-col">
           <table>
@@ -223,22 +201,21 @@ function generarContenidoActa(data) {
         <div class="firma-col">
           <table>
             <tr class="section-header"><td colspan="2"><strong>Datos Firmante</strong></td></tr>
-            <tr><td class="lc">Nombre</td><td>${val(data.nombreFirmante)}</td></tr>
-            <tr><td class="lc">RUT</td><td>${val(data.rutFirmante)}</td></tr>
-            <tr><td class="lc">Cargo</td><td>${val(data.cargoFirmante)}</td></tr>
-            <tr><td class="lc">Unidad</td><td>${val(data.unidadFirmante)}</td></tr>
-            <tr><td class="lc">Correo</td><td>${val(data.correoFirmante)}</td></tr>
-            <tr><td class="lc">Teléfono</td><td>${val(data.telefonoFirmante)}</td></tr>
+            <tr><td class="lc">Nombre</td><td>${data.mismoFirmante ? val(data.nombreUsuario)    : val(data.nombreFirmante)}</td></tr>
+            <tr><td class="lc">RUT</td><td>${data.mismoFirmante    ? val(data.rutUsuarioAsignado): val(data.rutFirmante)}</td></tr>
+            <tr><td class="lc">Cargo</td><td>${data.mismoFirmante  ? val(data.cargoUsuarioFirma) : val(data.cargoFirmante)}</td></tr>
+            <tr><td class="lc">Unidad</td><td>${data.mismoFirmante ? val(data.unidadUsuario)     : val(data.unidadFirmante)}</td></tr>
+            <tr><td class="lc">Correo</td><td>${data.mismoFirmante ? val(data.correoUsuario)     : val(data.correoFirmante)}</td></tr>
+            <tr><td class="lc">Teléfono</td><td>${data.mismoFirmante ? val(data.telefonoUsuario) : val(data.telefonoFirmante)}</td></tr>
           </table>
         </div>
       </div>
       <table>
         <tr>
-          <td class="lc" style="width:18%">Firma</td>
+          <td class="lc" style="width:18%">Firma Digital</td>
           <td class="firma-area">${data.firma ? `<img src="${data.firma}" alt="firma">` : '—'}</td>
         </tr>
       </table>
-      `}
 
       <!-- PIE -->
       <div class="acta-footer">
