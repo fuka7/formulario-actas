@@ -166,8 +166,36 @@
                 </div>
             </div>
 
-            <h3>Firma Digital</h3>
-            <p style="font-size:13px;color:var(--gray-600);margin-bottom:12px;">Firme con el mouse en el área de abajo</p>
+            <!-- DATOS FIRMANTE -->
+            <div class="firmante-checkbox-row">
+                <label class="checkbox-firmante-label">
+                    <input type="checkbox" id="mismoFirmante" onchange="toggleDatosFirmante(this)">
+                    <span class="checkbox-firmante-text">El Usuario Asignado es la misma persona que firmará el acta</span>
+                </label>
+            </div>
+
+            <div id="datosFirmanteSection">
+                <h3><span class="section-icon" style="font-size:15px;">&#9998;</span> Datos Firmante</h3>
+                <div class="grid-2">
+                    <input type="text" id="nombreFirmante" placeholder="Nombre Completo">
+                    <div>
+                        <input type="text" id="rutFirmante" placeholder="RUT (12.345.678-9)" maxlength="12">
+                        <small id="errorRutFirmante" class="error-message"></small>
+                    </div>
+                    <input type="text" id="cargoFirmante" placeholder="Cargo">
+                    <div style="position:relative"><input type="text" id="unidadFirmante" placeholder="Unidad o Departamento" style="width:100%"></div>
+                    <div>
+                        <input type="email" id="correoFirmante" placeholder="Correo electrónico">
+                        <small id="errorCorreoFirmante" class="error-message"></small>
+                    </div>
+                    <div>
+                        <input type="text" id="telefonoFirmante" placeholder="Teléfono">
+                        <small id="errorTelefonoFirmante" class="error-message"></small>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Firma</h3>
 
             <div class="firma-container">
                 <canvas id="signaturePad"></canvas>
@@ -178,8 +206,7 @@
             </div>
 
             <div class="firma-buttons">
-                <button type="button" class="btn-limpiar" onclick="clearSignature()">🗑 Limpiar Firma</button>
-                <button type="button" class="btn-confirmar" onclick="saveSignature()">✔ Confirmar Firma</button>
+                <!-- Botones de firma eliminados, ya no se requieren -->
             </div>
 
             <div class="firma-confirmed" id="firmaConfirmada">
@@ -210,5 +237,19 @@
 <script src="validaciones.js"></script>
 <script src="script.js"></script>
 
+    <script>
+        function toggleDatosFirmante(checkbox) {
+            var section = document.getElementById('datosFirmanteSection');
+            if (checkbox.checked) {
+                section.classList.add('hidden');
+                // Limpia campos y errores usando la función de validaciones.js
+                if (typeof limpiarValidacionesFirmante === 'function') {
+                    limpiarValidacionesFirmante();
+                }
+            } else {
+                section.classList.remove('hidden');
+            }
+        }
+    </script>
 </body>
 </html>

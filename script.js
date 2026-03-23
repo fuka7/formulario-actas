@@ -306,31 +306,9 @@ function mostrarBotonNuevaActa() {
 // ================= GENERAR PDF =================
 
 window.generarPDF = async function () {
-
+    // Permitir descargar el acta sin requerir firma digital
     const firmaGuardada = document.getElementById("firmaBase64").value;
-    if (!firmaGuardada) {
-        const container = document.querySelector('.firma-container');
-        if (container) {
-            container.style.border = '2px solid var(--red)';
-            container.style.boxShadow = '0 0 0 3px rgba(217,48,37,0.15)';
-            setTimeout(() => { container.style.border = ''; container.style.boxShadow = ''; }, 2500);
-        }
-        let msg = document.getElementById('firmaErrorMsg');
-        if (!msg) {
-            msg = document.createElement('small');
-            msg.id = 'firmaErrorMsg';
-            msg.style.cssText = 'color:var(--red);font-size:12px;font-weight:600;display:block;margin-top:6px;';
-            if (container) container.insertAdjacentElement('afterend', msg);
-        }
-        msg.textContent = hasSignature
-            ? '⚠ Debes confirmar la firma antes de generar el PDF'
-            : '⚠ Debes firmar y confirmar antes de generar el PDF';
-        msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => { if (msg) msg.textContent = ''; }, 4000);
-        return;
-    }
-
-    const firma      = firmaGuardada;
+    const firma = firmaGuardada || "";
     const numeroActa = "ACTA-" + Date.now();
     const g = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
 

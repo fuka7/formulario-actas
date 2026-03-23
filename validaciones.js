@@ -481,8 +481,72 @@ function inicializarValidaciones() {
     activarValidacionEmail("correoUsuario",    "errorCorreoUsuario");
     activarValidacionTelefono("telefonoUsuario", "errorTelefonoUsuario");
 
+    // Datos Firmante (solo activos cuando el checkbox NO está marcado)
+    activarValidacionRutFirmante("rutFirmante",       "errorRutFirmante");
+    activarValidacionEmail("correoFirmante",          "errorCorreoFirmante");
+    activarValidacionTelefono("telefonoFirmante",     "errorTelefonoFirmante");
+
     activarAutocompleteUnidad("unidad");
     activarAutocompleteUnidad("unidadUsuario");
+    activarAutocompleteUnidad("unidadFirmante");
 
     activarValidacionRequeridos();
+}
+
+// ---------------------------------------------------------------
+// ACTIVAR VALIDACIÓN RUT FIRMANTE (solo si sección visible)
+// ---------------------------------------------------------------
+function activarValidacionRutFirmante(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+    if (!input || !error) return;
+
+    input.addEventListener("input", function () {
+        // Ignorar si el firmante es el mismo que el usuario asignado
+        if (document.getElementById('mismoFirmante')?.checked) return;
+        this.value = formatearRut(this.value);
+        if (this.value.length < 3) {
+            error.style.display = "none";
+            input.classList.remove("input-error", "input-valid");
+            return;
+        }
+        if (validarRut(this.value)) {
+            error.textContent = "✔ RUT válido";
+            error.className = "error-message valid-message";
+            error.style.display = "block";
+            input.classList.remove("input-error");
+            input.classList.add("input-valid");
+        } else {
+            error.textContent = "RUT ingresado incorrecto";
+            error.className = "error-message invalid-message";
+            error.style.display = "block";
+            input.classList.remove("input-valid");
+            input.classList.add("input-error");
+        }
+    });
+}
+
+// ---------------------------------------------------------------
+// LIMPIAR ERRORES DE LOS CAMPOS FIRMANTE (al marcar checkbox)
+// ---------------------------------------------------------------
+function limpiarValidacionesFirmante() {
+    const fields = [
+        { input: 'nombreFirmante',   error: null },
+        { input: 'rutFirmante',      error: 'errorRutFirmante' },
+        { input: 'cargoFirmante',    error: null },
+        { input: 'unidadFirmante',   error: null },
+        { input: 'correoFirmante',   error: 'errorCorreoFirmante' },
+        { input: 'telefonoFirmante', error: 'errorTelefonoFirmante' },
+    ];
+    fields.forEach(({ input: id, error: eid }) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.value = '';
+            el.classList.remove('input-error', 'input-valid');
+        }
+        if (eid) {
+            const err = document.getElementById(eid);
+            if (err) { err.style.display = 'none'; err.textContent = ''; }
+        }
+    });
 }
