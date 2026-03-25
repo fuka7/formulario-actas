@@ -367,20 +367,20 @@ window.generarPDF = async function () {
         telefonoFirmante:  g("telefonoFirmante"),
     };
 
-    // Validar requeridos
-    const required = Array.from(document.querySelectorAll('#registroForm [required]'));
-    const empty    = required.filter(i => !(i.value || '').toString().trim());
-    if (empty.length) {
-        empty.forEach(i => {
-            i.classList.add('input-error', 'input-shake');
-            i.addEventListener('animationend', function onEnd() {
-                i.classList.remove('input-shake');
-                i.removeEventListener('animationend', onEnd);
-            });
-        });
-        empty[0].focus();
-        return;
-    }
+    // Validar requeridos (desactivado para permitir descarga en blanco)
+    // const required = Array.from(document.querySelectorAll('#registroForm [required]'));
+    // const empty    = required.filter(i => !(i.value || '').toString().trim());
+    // if (empty.length) {
+    //     empty.forEach(i => {
+    //         i.classList.add('input-error', 'input-shake');
+    //         i.addEventListener('animationend', function onEnd() {
+    //             i.classList.remove('input-shake');
+    //             i.removeEventListener('animationend', onEnd);
+    //         });
+    //     });
+    //     empty[0].focus();
+    //     return;
+    // }
 
     const contenido = generarContenidoActa(data);
     const tempDiv   = document.createElement("div");
