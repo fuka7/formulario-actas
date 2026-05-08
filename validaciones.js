@@ -473,8 +473,6 @@ function activarAutocompleteUnidad(inputId) {
 //     activarValidacionEmail("emailUsuarioDG",   "errorEmailUsuarioDG");
 //     activarValidacionTelefono("telefonoDG",    "errorTelefonoDG");
 
-//     // Técnico
-//     activarValidacionRut("rutTecnico",         "errorRutTecnico");
 
 //     // Usuario Asignado (responsable MINSAL)
 //     activarValidacionRut("rutUsuarioAsignado", "errorRutUsuarioAsignado");
