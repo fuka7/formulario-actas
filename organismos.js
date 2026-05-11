@@ -2,7 +2,7 @@
 
 const serviciosSalud = [
   "Servicio de Salud Arica",
-  "Servicio de Salud Iquique",
+  "Servicio de Salud Tarapacá",
   "Servicio de Salud Antofagasta",
   "Servicio de Salud Atacama",
   "Servicio de Salud Coquimbo",
@@ -54,7 +54,7 @@ const seremisSalud = [
 const organismoRegionMap = {
 
   "Servicio de Salud Arica": "Arica y Parinacota",
-  "Servicio de Salud Iquique": "Tarapacá",
+  "Servicio de Salud Tarapacá": "Tarapacá",
   "Servicio de Salud Antofagasta": "Antofagasta",
   "Servicio de Salud Atacama": "Atacama",
   "Servicio de Salud Coquimbo": "Coquimbo",
