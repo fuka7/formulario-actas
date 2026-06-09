@@ -1,5 +1,9 @@
 // ================= ORGANISMOS =================
 
+const minsalCentral = [
+  "MINSAL Central"
+];
+
 const serviciosSalud = [
   "Servicio de Salud Arica",
   "Servicio de Salud Tarapacá",
@@ -52,6 +56,8 @@ const seremisSalud = [
 ];
 
 const organismoRegionMap = {
+
+  "MINSAL Central": "Metropolitana de Santiago",
 
   "Servicio de Salud Arica": "Arica y Parinacota",
   "Servicio de Salud Tarapacá": "Tarapacá",

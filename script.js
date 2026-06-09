@@ -38,6 +38,15 @@ regionSelect.addEventListener("change", function () {
 serviciosSalud.sort();
 seremisSalud.sort();
 
+const grupoMinsal = document.createElement("optgroup");
+grupoMinsal.label = "MINSAL";
+minsalCentral.forEach(item => {
+    const option = document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    grupoMinsal.appendChild(option);
+});
+
 const grupoServicios = document.createElement("optgroup");
 grupoServicios.label = "Servicios de Salud";
 serviciosSalud.forEach(servicio => {
@@ -56,6 +65,7 @@ seremisSalud.forEach(seremi => {
     grupoSeremi.appendChild(option);
 });
 
+organismoSelect.appendChild(grupoMinsal);
 organismoSelect.appendChild(grupoServicios);
 organismoSelect.appendChild(grupoSeremi);
 
