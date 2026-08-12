@@ -406,26 +406,26 @@ window.generarPDF = async function () {
 
     try {
         const canvasRender = await (window.html2canvas
-            ? window.html2canvas(tempDiv, { scale: 2, backgroundColor: '#ffffff', useCORS: true })
-            : html2canvas(tempDiv, { scale: 2, backgroundColor: '#ffffff', useCORS: true }));
+            ? window.html2canvas(tempDiv, { scale: 1, backgroundColor: '#ffffff', useCORS: true })
+            : html2canvas(tempDiv, { scale: 1, backgroundColor: '#ffffff', useCORS: true }));
 
-        const imgData = canvasRender.toDataURL('image/png');
+        const imgData = canvasRender.toDataURL('image/jpeg', 0.7);
         const JsPDFConstructor =
             (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF :
             (window.jsPDF ? window.jsPDF : null);
 
         if (!JsPDFConstructor) throw new Error('jsPDF no disponible');
 
-        const pdf        = new JsPDFConstructor({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+        const pdf = new JsPDFConstructor({ unit: 'mm', format: 'a4', orientation: 'portrait', compress: true });
         const pdfWidth   = pdf.internal.pageSize.getWidth();
         const pdfHeight  = (canvasRender.height * pdfWidth) / canvasRender.width;
         const pageHeight = pdf.internal.pageSize.getHeight();
 
         if (pdfHeight > pageHeight) {
             const scale = pageHeight / pdfHeight;
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth * scale, pdfHeight * scale);
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth * scale, pdfHeight * scale);
         } else {
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
         }
         pdf.save(numeroActa + '.pdf');
         mostrarBotonNuevaActa();
@@ -435,8 +435,8 @@ window.generarPDF = async function () {
         await html2pdf().set({
             margin: 10,
             filename: numeroActa + ".pdf",
-            html2canvas: { scale: 2, backgroundColor: "#ffffff" },
-            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+            html2canvas: { scale: 1, backgroundColor: "#ffffff" },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait", compress: true }
         }).from(tempDiv).save();
         mostrarBotonNuevaActa();
 
