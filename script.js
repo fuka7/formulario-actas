@@ -318,11 +318,9 @@ window.generarPDF = async function () {
     // Permitir descargar el acta sin requerir firma digital
     const firmaGuardada = document.getElementById("firmaBase64").value;
     const firma = firmaGuardada || "";
-    const numeroActa = "ACTA-" + Date.now();
     const g = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
 
     const data = {
-        numeroActa,
         // Si el campo fecha está vacío, dejarlo vacío en el acta
         fecha: g("fecha")
             ? new Date(g("fecha") + 'T12:00:00').toLocaleDateString('es-CL')
@@ -406,10 +404,10 @@ window.generarPDF = async function () {
 
     try {
         const canvasRender = await (window.html2canvas
-            ? window.html2canvas(tempDiv, { scale: 1, backgroundColor: '#ffffff', useCORS: true })
-            : html2canvas(tempDiv, { scale: 1, backgroundColor: '#ffffff', useCORS: true }));
+            ? window.html2canvas(tempDiv, { scale: 2, backgroundColor: '#ffffff', useCORS: true })
+            : html2canvas(tempDiv, { scale: 2, backgroundColor: '#ffffff', useCORS: true }));
 
-        const imgData = canvasRender.toDataURL('image/jpeg', 0.7);
+        const imgData = canvasRender.toDataURL('image/jpeg', 0.95);
         const JsPDFConstructor =
             (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF :
             (window.jsPDF ? window.jsPDF : null);
@@ -427,16 +425,16 @@ window.generarPDF = async function () {
         } else {
             pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
         }
-        pdf.save(numeroActa + '.pdf');
+        pdf.save('Acta_de_Cambio_de_Equipo.pdf');
         mostrarBotonNuevaActa();
 
     } catch (err) {
         console.error('Error creando PDF:', err);
         await html2pdf().set({
             margin: 10,
-            filename: numeroActa + ".pdf",
-            html2canvas: { scale: 1, backgroundColor: "#ffffff" },
-            jsPDF: { unit: "mm", format: "a4", orientation: "portrait", compress: true }
+            filename: 'Acta_de_Cambio_de_Equipo.pdf',
+            html2canvas: { scale: 2, backgroundColor: "#ffffff" },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait", compress: false }
         }).from(tempDiv).save();
         mostrarBotonNuevaActa();
 
