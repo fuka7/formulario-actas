@@ -79,7 +79,6 @@ function generarContenidoActa(data) {
         <div class="acta-title-block">
           <h1>Acta de Cambio de Equipo</h1>
           <div class="acta-subtitle">Ministerio de Salud · Proyecto MINSAL 2026 · Chile</div>
-          ${(data.organismo || data.serieRecambio) ? `<div class="acta-subtitle" style="margin-top:3px;">${val(data.organismo)}${data.organismo && data.serieRecambio ? ' · ' : ''}${data.serieRecambio ? `N° Serie Entrante: ${val(data.serieRecambio)}` : ''}</div>` : ''}
         </div>
         <div style="width:120px"></div>
       </div>
@@ -226,7 +225,7 @@ function generarContenidoActa(data) {
       </table>
       <table>
         <tr>
-          <td class="lc" style="width:18%">Firma Digital</td>
+          <td class="lc" style="width:18%">Firma</td>
           <td class="firma-area">${data.firma ? `<img src="${data.firma}" alt="firma" width="170" height="65">` : ''}</td>
         </tr>
       </table>
