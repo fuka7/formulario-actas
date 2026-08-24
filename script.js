@@ -146,10 +146,10 @@ function updateCounter(groupClass, counterId, total) {
 }
 
 document.querySelectorAll('.checklist.instalacion input').forEach(cb => {
-    cb.addEventListener('change', () => updateCounter('instalacion', 'countInstalacion', 13));
+    cb.addEventListener('change', () => updateCounter('instalacion', 'countInstalacion', 12));
 });
 document.querySelectorAll('.checklist.validacion input').forEach(cb => {
-    cb.addEventListener('change', () => updateCounter('validacion', 'countValidacion', 4));
+    cb.addEventListener('change', () => updateCounter('validacion', 'countValidacion', 2));
 });
 
 
@@ -268,8 +268,8 @@ function resetForm() {
 
     const ci = document.getElementById('countInstalacion');
     const cv = document.getElementById('countValidacion');
-    if (ci) ci.textContent = '0 / 13';
-    if (cv) cv.textContent = '0 / 4';
+    if (ci) ci.textContent = '0 / 12';
+    if (cv) cv.textContent = '0 / 2';
 
 
     if (window.clearSignature) window.clearSignature();
@@ -309,6 +309,40 @@ function mostrarBotonNuevaActa() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
     btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+
+// ================= NOMBRE DE ARCHIVO PDF =================
+
+function slugify(texto) {
+    return (texto || '')
+        .toString()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quitar tildes
+        .replace(/[^a-zA-Z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '')
+        .trim();
+}
+
+function construirNombreArchivo(data) {
+    const partes = [];
+    if (data.organismo) partes.push(slugify(data.organismo));
+    if (data.serieRecambio) partes.push(slugify(data.serieRecambio));
+    if (partes.length === 0) partes.push('Acta_de_Cambio_de_Equipo');
+    return partes.filter(Boolean).join('_') + '.pdf';
+}
+
+
+// ================= ESPERAR IMÁGENES (FIRMA, LOGO) =================
+
+function esperarImagenes(container) {
+    const imgs = Array.from(container.querySelectorAll('img'));
+    return Promise.all(imgs.map(img => {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+        return new Promise(resolve => {
+            img.addEventListener('load', resolve, { once: true });
+            img.addEventListener('error', resolve, { once: true });
+        });
+    }));
 }
 
 
@@ -400,7 +434,12 @@ window.generarPDF = async function () {
     overlay.innerHTML = '<div style="background:#fff;padding:16px 24px;border-radius:8px;font-family:Arial">Generando PDF, por favor espere...</div>';
     document.body.appendChild(overlay);
 
-    await new Promise(resolve => setTimeout(resolve, 1200));
+    // Espera base para que el navegador termine de maquetar el contenido
+    await new Promise(resolve => setTimeout(resolve, 300));
+    // Espera activa a que todas las imágenes (logo y firma digital) terminen de cargar
+    await esperarImagenes(tempDiv);
+    // Pequeño margen adicional tras la carga de imágenes antes de capturar
+    await new Promise(resolve => setTimeout(resolve, 200));
 
     try {
         const canvasRender = await (window.html2canvas
@@ -425,14 +464,14 @@ window.generarPDF = async function () {
         } else {
             pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
         }
-        pdf.save('Acta_de_Cambio_de_Equipo.pdf');
+        pdf.save(construirNombreArchivo(data));
         mostrarBotonNuevaActa();
 
     } catch (err) {
         console.error('Error creando PDF:', err);
         await html2pdf().set({
             margin: 10,
-            filename: 'Acta_de_Cambio_de_Equipo.pdf',
+            filename: construirNombreArchivo(data),
             html2canvas: { scale: 2, backgroundColor: "#ffffff" },
             jsPDF: { unit: "mm", format: "a4", orientation: "portrait", compress: false }
         }).from(tempDiv).save();

@@ -57,9 +57,9 @@ function generarContenidoActa(data) {
         background: #fff;
       }
       .firma-area { height: 80px; padding: 4px 7px; vertical-align: middle; }
-      .firma-area img { max-width: 180px; max-height: 70px; }
+      .firma-area img { width: 170px; height: 65px; object-fit: contain; object-position: left center; display: block; }
       .acta-footer { text-align: center; font-size: 10px; color: #888; margin-top: 16px; padding-top: 8px; border-top: 1px solid #ccc; }
-      .obs-box { border: 1px solid #ccc; padding: 6px 8px; min-height: 32px; white-space: pre-wrap; font-size: 11px; background: #fafafa; }
+      .obs-box { border: 1px solid #ccc; padding: 6px 8px; min-height: 90px; white-space: pre-wrap; font-size: 11px; background: #fafafa; }
       .spacer { height: 10px; }
       .firma-grid { display: table; width: 100%; border-collapse: collapse; }
       .firma-col { display: table-cell; width: 50%; vertical-align: top; border: 1px solid #ccc; padding: 0; }
@@ -79,6 +79,7 @@ function generarContenidoActa(data) {
         <div class="acta-title-block">
           <h1>Acta de Cambio de Equipo</h1>
           <div class="acta-subtitle">Ministerio de Salud · Proyecto MINSAL 2026 · Chile</div>
+          ${(data.organismo || data.serieRecambio) ? `<div class="acta-subtitle" style="margin-top:3px;">${val(data.organismo)}${data.organismo && data.serieRecambio ? ' · ' : ''}${data.serieRecambio ? `N° Serie Entrante: ${val(data.serieRecambio)}` : ''}</div>` : ''}
         </div>
         <div style="width:120px"></div>
       </div>
@@ -158,13 +159,12 @@ function generarContenidoActa(data) {
             <tr><td>Instalación y configuración de periféricos adicionales (escáner, impresora, fax, etc.)</td><td class="chk">${chk(data.instalacionChecks[3])}</td></tr>
             <tr><td>Configuración y conexión a red de datos</td><td class="chk">${chk(data.instalacionChecks[4])}</td></tr>
             <tr><td>Configuración IP Equipo</td><td class="chk">${chk(data.instalacionChecks[5])}</td></tr>
-            <tr><td>Instalación y personalización de aplicaciones desde el servidor de red</td><td class="chk">${chk(data.instalacionChecks[6])}</td></tr>
-            <tr><td>Definición y configuración del servicio de impresión</td><td class="chk">${chk(data.instalacionChecks[7])}</td></tr>
-            <tr><td>Migración de información del usuario desde su equipo antiguo</td><td class="chk">${chk(data.instalacionChecks[8])}</td></tr>
-            <tr><td>Conexión final del equipo a la red</td><td class="chk">${chk(data.instalacionChecks[9])}</td></tr>
-            <tr><td>Verificación de agente en línea con mesa de ayuda</td><td class="chk">${chk(data.instalacionChecks[10])}</td></tr>
-            <tr><td>Configuración de correo electrónico del usuario</td><td class="chk">${chk(data.instalacionChecks[11])}</td></tr>
-            <tr><td>Configuración de pie de firma en correo</td><td class="chk">${chk(data.instalacionChecks[12])}</td></tr>
+            <tr><td>Definición y configuración del servicio de impresión</td><td class="chk">${chk(data.instalacionChecks[6])}</td></tr>
+            <tr><td>Migración de información del usuario desde su equipo antiguo</td><td class="chk">${chk(data.instalacionChecks[7])}</td></tr>
+            <tr><td>Conexión final del equipo a la red</td><td class="chk">${chk(data.instalacionChecks[8])}</td></tr>
+            <tr><td>Verificación de agente en línea con mesa de ayuda</td><td class="chk">${chk(data.instalacionChecks[9])}</td></tr>
+            <tr><td>Configuración de correo electrónico del usuario</td><td class="chk">${chk(data.instalacionChecks[10])}</td></tr>
+            <tr><td>Habilitación cuenta Office 365</td><td class="chk">${chk(data.instalacionChecks[11])}</td></tr>
           </table>
         </div>
 
@@ -173,9 +173,7 @@ function generarContenidoActa(data) {
           <table>
             <tr class="section-header"><td><strong>Checklist Validación</strong></td><td class="chk"></td></tr>
             <tr><td>Número de serie del equipo</td><td class="chk">${chk(data.validacionChecks[0])}</td></tr>
-            <tr><td>N° Guía de despacho</td><td class="chk">${chk(data.validacionChecks[1])}</td></tr>
-            <tr><td>Revisión del sistema operativo y software instalados</td><td class="chk">${chk(data.validacionChecks[2])}</td></tr>
-            <tr><td>Entrega formal del equipo con formulario de ingreso</td><td class="chk">${chk(data.validacionChecks[3])}</td></tr>
+            <tr><td>Revisión del sistema operativo y software instalados</td><td class="chk">${chk(data.validacionChecks[1])}</td></tr>
           </table>
         </div>
 
@@ -229,7 +227,7 @@ function generarContenidoActa(data) {
       <table>
         <tr>
           <td class="lc" style="width:18%">Firma Digital</td>
-          <td class="firma-area">${data.firma ? `<img src="${data.firma}" alt="firma">` : ''}</td>
+          <td class="firma-area">${data.firma ? `<img src="${data.firma}" alt="firma" width="170" height="65">` : ''}</td>
         </tr>
       </table>
 
